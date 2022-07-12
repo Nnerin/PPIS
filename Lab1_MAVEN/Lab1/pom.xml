@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.myorg</groupId>
+  <artifactId>lab1</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>lab1</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <profiles>
+    <profile>
+      <id>test</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.1</version>
+            <executions>
+              <execution>
+                <phase>test</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <tasks>
+                    <echo>Using env.test.properties</echo>
+                    <copy file="src/main/resources/env.test.properties"
+                          tofile="${project.build.outputDirectory}/env.test.properties"/>
+                  </tasks>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>normal</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.1</version>
+            <executions>
+              <execution>
+                <phase>compile</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <tasks>
+                    <echo>Using env.properties</echo>
+                    <copy file="src/main/resources/env.properties"
+                          tofile="${project.build.outputDirectory}/env.properties"/>
+                  </tasks>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>prod</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.1</version>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <tasks>
+                    <echo>Using env.prod.properties</echo>
+                    <copy file="src/main/resources/env.prod.properties"
+                          tofile="${project.build.outputDirectory}/env.prod.properties"/>
+                  </tasks>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+<!--  <build>-->
+<!--    <plugins>-->
+<!--      <plugin>-->
+<!--        <groupId>org.apache.maven.plugins</groupId>-->
+<!--        <artifactId>maven-site-plugin</artifactId>-->
+<!--        <version>3.7.1</version>-->
+<!--      </plugin>-->
+<!--      <plugin>-->
+<!--        <groupId>org.apache.maven.plugins</groupId>-->
+<!--        <artifactId>maven-project-info-reports-plugin</artifactId>-->
+<!--        <version>3.0.0</version>-->
+<!--      </plugin>-->
+
+<!--      <plugin>-->
+<!--        <groupId>org.apache.maven.plugins</groupId>-->
+<!--        <artifactId>maven-antrun-plugin</artifactId>-->
+<!--        <version>1.1</version>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <id>id.validate</id>-->
+<!--            <phase>validate</phase>-->
+<!--            <goals>-->
+<!--              <goal>run</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <tasks>-->
+<!--                <echo>validate phase</echo>-->
+<!--              </tasks>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+<!--          <execution>-->
+<!--            <id>id.compile</id>-->
+<!--            <phase>compile</phase>-->
+<!--            <goals>-->
+<!--              <goal>run</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <tasks>-->
+<!--                <echo>compile phase</echo>-->
+<!--              </tasks>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+
+<!--          <execution>-->
+<!--            <id>id.test</id>-->
+<!--            <phase>test</phase>-->
+<!--            <goals>-->
+<!--              <goal>run</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <tasks>-->
+<!--                <echo>test phase</echo>-->
+<!--              </tasks>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+
+<!--          <execution>-->
+<!--            <id>id.package</id>-->
+<!--            <phase>package</phase>-->
+<!--            <goals>-->
+<!--              <goal>run</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <tasks>-->
+<!--                <echo>package phase</echo>-->
+<!--              </tasks>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+
+<!--          <execution>-->
+<!--            <id>id.deploy</id>-->
+<!--            <phase>deploy</phase>-->
+<!--            <goals>-->
+<!--              <goal>run</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <tasks>-->
+<!--                <echo>deploy phase</echo>-->
+<!--              </tasks>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+
+<!--          <execution>-->
+<!--            <id>id.pre-site</id>-->
+<!--            <phase>pre-site</phase>-->
+<!--            <goals>-->
+<!--              <goal>run</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <tasks>-->
+<!--                <echo>pre-site phase</echo>-->
+<!--              </tasks>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+
+<!--          <execution>-->
+<!--            <id>id.site</id>-->
+<!--            <phase>site</phase>-->
+<!--            <goals>-->
+<!--              <goal>run</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <tasks>-->
+<!--                <echo>site phase</echo>-->
+<!--              </tasks>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+
+<!--          <execution>-->
+<!--            <id>id.post-site</id>-->
+<!--            <phase>post-site</phase>-->
+<!--            <goals>-->
+<!--              <goal>run</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <tasks>-->
+<!--                <echo>post-site phase</echo>-->
+<!--              </tasks>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+
+<!--          <execution>-->
+<!--            <id>id.site-deploy</id>-->
+<!--            <phase>site-deploy</phase>-->
+<!--            <goals>-->
+<!--              <goal>run</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <tasks>-->
+<!--                <echo>site-deploy</echo>-->
+<!--              </tasks>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+
+<!--        </executions>-->
+<!--      </plugin>-->
+<!--    </plugins>-->
+<!--  </build>-->
+</project>
